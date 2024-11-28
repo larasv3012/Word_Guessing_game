@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Guessing Game</title>
+</head>
+<body>
+    <h1>Word Guessing Game</h1>
+    <p>Word: 
+    {% for char in word %}
+        {% if char in guesses %}
+            {{ char }}
+        {% else %}
+            _
+        {% endif %}
+    {% endfor %}
+    </p>
+    <p>Remaining Attempts: {{ remaining_attempts }}</p>
+    {% if remaining_attempts == 3 %}
+        <p>Hint: {{ meaning }}</p>
+    {% endif %}
+    {% if game_won %}
+        <p>Congratulations! You guessed the word: {{ word }}</p>
+        <p>Meaning: {{ meaning }}</p>
+    {% elif game_over %}
+        <p>Game Over! The word was: {{ word }}</p>
+        <p>Meaning: {{ meaning }}</p>
+    {% else %}
+        <form method="POST">
+            <label for="guess">Enter a letter:</label>
+            <input type="text" name="guess" maxlength="1" required>
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+</body>
+</html>
